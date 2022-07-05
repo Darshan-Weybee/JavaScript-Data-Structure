@@ -347,7 +347,7 @@ console.log(new Set("DarshanKagthara").size);
 // data stored in map in key value pairs
 // in map keys are anything but in object keys are string  
 
-// set is used to set the data into the set and it return the updated map
+// set() method is used to set the data into the set and it return the updated map
 const rest = new Map();
 rest.set("name", "Classico Italiano");
 rest.set(1, "Firenze, Italy");
@@ -378,4 +378,221 @@ rest.set(document.querySelector("h1"), "heading");
 console.log(rest);
 console.log(rest.size);
 console.log(rest.get(arr2));
+
+
+const question = new Map([
+  ["question", "What is the best programming language in the world?"],
+  [1, "C"],
+  [2, "Java"],
+  [3, "JavaScript"],
+  ["correct", 3],
+  [true, "Corect"],
+  [false, "Try Again!"]
+]);
+
+console.log(question);
+
+console.log(Object.entries(openingHours));
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+console.log(question.get("question"));
+for(const [key, value] of question){
+  // console.log(key);
+  if(typeof key == "number"){
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+const answer = 3; //prompt("Enter Your Answer");
+console.log(question.get(question.get("correct") == answer));
+
+
+// input comes from three sources
+// 1) from the program itself (e.g. status message)
+// 2) from the Ui (e.g. form and prompt box)
+// 3) from the external sources (e.g. web api)
+
+// for simple list: Arrays or sets
+// for key/value pairs: objects or map
+// data come fro web api is in form of JSON
+
+// Array
+/*Use when you need to work with ordered list of value(might contain duplicate)
+use wen you need to manipulate the data*/
+
+// Set
+/*Use when you need to work with unique values
+Use when high-performance is really important
+Use to remove duplicates from arrays*/
+
+//objects
+/*More traditional key/value store
+Easier to write and access values with  .  and  []
+Use when you need to include function(methods)
+use when working with JSON(can be converted to map)*/
+
+//Maps
+/*Better Performance
+Keys can have any data type
+Easy to iterate
+Easy to compute size
+Use when you simply need to map key to values
+Use when you need keys that are not strings*/
+
+// Strings
+// .length, indexOf(),   lastindexOf(), slice()
+
+const airline = "TAP Air Portugal";
+const plane  = "A320";
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+console.log("Darshan"[2]);
+
+console.log(airline.length);
+console.log("Darshan".length);
+
+console.log(airline.indexOf("r"));
+console.log(airline.lastIndexOf("r"));
+console.log(airline.indexOf("Portugal"));
+
+console.log(airline.slice(4));
+console.log(airline.slice(4, 7));
+console.log(airline.slice(0, airline.indexOf(" ")));
+console.log(airline.slice(airline.lastIndexOf(" ")+1));
+
+console.log(airline.slice(-4));
+console.log(airline.slice(1, -4));
+
+function checkMiddleSeat(seat){
+    const s = seat.slice(-1);
+    if(s == "B" || s == "E"){
+        console.log("You get the middle seat");
+    }
+    else{
+        console.log("You are lucky you get the window side seat");
+    }
+}
+checkMiddleSeat("11B");
+checkMiddleSeat("11F");
+checkMiddleSeat("11C");
+checkMiddleSeat("11E");
+
+// for this
+// javascript behind the string put that string into the object and then call the method on it
+console.log(new String("jonas"));
+console.log(typeof new String("jonas"));
+console.log(typeof new String("jonas").slice(1));
+
+
+// .toLowerCase,   .toUpperCase,  trim(), replace()(it is case sensitive method),  /string/g(to change all the string without replaceAll() method)
+console.log(airline.toLowerCase());
+console.log("Darshan".toUpperCase());
+
+const passenger = "jOnAs";
+const passengerLower = passenger.toLowerCase();
+const passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);
+
+const email = "darshan@gmail.com";
+const loginEmail = "   Darshan@gmail.Com \n";
+const lowerEmail = loginEmail.toLowerCase();
+console.log(lowerEmail);
+const correctEmail = lowerEmail.trim();
+console.log(correctEmail);
+
+const normallizeEmail = loginEmail.toLowerCase().trim();
+console.log(normallizeEmail);
+
+const priceGB = "288,97!";
+const priceGBUpdated = priceGB.replace("!", "$").replace(",", ".");
+console.log(priceGBUpdated);
+
+const annoucement = "All passenger come to boarding door 23!, Boarding door 23!";
+const annoucementUpdated = annoucement.replace("door", "gate");
+console.log(annoucementUpdated);
+
+const annoucementNew = annoucement.replace(/door/g, "gate");
+console.log(annoucementNew);
+
+
+// includes(),  startsWith(), endsWith()
+const plane1 = "Airbus A320neo";
+console.log(plane1.includes("A320"));
+console.log(plane1.includes("Airbue"));
+console.log(plane1.includes("neo"));
+console.log(plane1.startsWith("Airbus"));
+console.log(plane1.endsWith("ne"));
+
+if(plane1.startsWith("Airbus") && plane1.endsWith("neo")){
+  console.log("Part of new airbus family");
+}
+else
+    console.log("Not Part of new airbus family");
+
+
+const checkBaggage = function (items){
+    const baggage = items.toLowerCase();
+    if(baggage.includes("knife") || baggage.includes("gun"))
+        console.log("you are not allowed");
+    else
+        console.log("welcome to aboard");
+}
+checkBaggage("laptop, food, pocket knife");
+checkBaggage("laptop, food");
+checkBaggage("laptop, food, pocket gun");
+
+// split(), join()
+
+console.log("a+very+nice+string".split("+"));
+console.log("Darshan Kagthara".split(" "));
+
+const [firstName, lastName] = "Darshan Kagathara".split(" ");
+console.log(firstName, lastName);
+
+const newName = ["Mr." ,firstName.toUpperCase(), lastName.toLowerCase()].join(" ");
+console.log(newName);
+
+capitalizename("jessica ann smith davis");
+capitalizename("jonas deo");
+
+function capitalizename(name){
+    const names = name.split(" ");
+    const namesUpper = [];
+
+    for(const n of names){
+      namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    }
+    console.log(namesUpper.join(" "));
+}
+
+// add  padding at start and at end 
+// padStart(), padEnd(), repeat()
+
+const message = "Go to gate 20!";
+console.log(message.padStart(25, "+").padEnd(30, "+"));
+console.log("Darshan".padStart(20, "=").padEnd(30, "="));
+
+maskCreditCard(213456798979879);
+maskCreditCard("123546879921369");
+maskCreditCard("12345678");
+
+function maskCreditCard(number){
+  const numbers = String(number);
+  const lastNumber = numbers.slice(-4);
+  console.log(lastNumber.padStart(numbers.length, "*"));
+}
+
+const message1 = "Bad Weather ";
+console.log(message1.repeat(5));
+
+planeInLine(5);
+planeInLine(6);
+planeInLine(10);
+
+function planeInLine(n){
+    console.log(`There are ${n} planes in line ${"airbus    ".repeat(n)}`);
+}
+
 
