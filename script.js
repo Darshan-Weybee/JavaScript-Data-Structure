@@ -102,6 +102,10 @@ console.log(a1,b1);
 const {fri: {open: o, close: c2}} = restaurant.openingHours;
 console.log(o, c2);
 
+// const minu = [...restaurant.mainMenu];
+// console.log("....",minu);
+
+
 // spread operator:
 // to expand the array element at once.
 // it is used into the right side of the equal sign
@@ -316,9 +320,13 @@ for(const [key, {open, close}] of entries)
 // it does not contain any duplicate values
 // set can hold different datatypes also
 // order of the set in set are irrelevant
-
+// .size, .has, .add, .delete
 const ordersSet = new Set(["pizza","pasta", "risotto", "pasta", "pizza"]);
-
+// for(let i=0; i<ordersSet.size; i++){
+//     console.log("....",ordersSet);
+// }
+const orderArray = [...ordersSet];
+console.log("....",orderArray[1]);
 console.log(ordersSet);
 console.log(ordersSet.size);
 console.log(ordersSet.has("pizza"));
@@ -346,8 +354,8 @@ console.log(new Set("DarshanKagthara").size);
 
 // data stored in map in key value pairs
 // in map keys are anything but in object keys are string  
-
 // set() method is used to set the data into the set and it return the updated map
+// .set(key, value), .get(), .has(), .delete, .clear(), .size
 const rest = new Map();
 rest.set("name", "Classico Italiano");
 rest.set(1, "Firenze, Italy");
@@ -394,8 +402,11 @@ console.log(question);
 
 console.log(Object.entries(openingHours));
 const hoursMap = new Map(Object.entries(openingHours));
-console.log(hoursMap);
+console.log("....",hoursMap);
 
+// for(const q of question){
+//   console.log("....",q);
+// }
 console.log(question.get("question"));
 for(const [key, value] of question){
   // console.log(key);
@@ -596,3 +607,12 @@ function planeInLine(n){
 }
 
 
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+  for(const flight of flights.split("+")){
+     const [type, from, to, time] = flight.split(";");
+     let output = type.replaceAll("_", " ") + " from " + from.slice(0,3).toUpperCase() + " to " +to.slice(0,3).toUpperCase() + "  " +time.replace(":", "h");
+     output = output.padStart(43);
+     console.log(output);
+  }
