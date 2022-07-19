@@ -306,5 +306,54 @@ String.prototype.lastindexofMethod = function(word){
     }
     console.log(index);
 }
-
-
+String.prototype.spliceMethod = function(first, second = "a", ...elements){
+    let len = this.length;
+    if(second == "a"){
+        let st = this;
+        let pre = "";
+        console.log(this);
+        if(0 <= first && first < len){
+            for(let i=0; i<first; i++){
+                pre = pre + this[i];
+            }
+            console.log(pre);
+        }
+        else{
+            for(let i=0; i<len-Math.abs(first); i++){
+                pre = pre + this[i];
+            }
+            console.log(pre);
+        }
+    }
+    else{
+        let pre = "";
+        let last = "";
+        let middle = "";
+        if(first >= 0){
+            for(let i=0; i<first; i++){
+                pre = pre + this[i];
+            }
+            for(let i=first+second; i<this.length; i++){
+                last = last + this[i];
+            }
+            for(let i=0; i<elements.length; i++){
+                middle = middle + elements[i];
+            }
+            console.log(pre + middle + last);
+        }
+        else{
+            for(let i=0; i<len-Math.abs(first); i++){
+                pre = pre + this[i];
+            }
+            for(let i=len-Math.abs(first)+second; i<this.length; i++){
+                last = last + this[i];
+            }
+            for(let i=0; i<elements.length; i++){
+                middle = middle + elements[i];
+            }
+            console.log(pre + middle + last);
+        }
+        
+    }
+}
+"darshan".spliceMethod(-4,3);
