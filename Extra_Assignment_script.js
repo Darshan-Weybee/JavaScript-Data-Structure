@@ -311,6 +311,7 @@ String.prototype.lastindexofMethod = function(word){
 }
 String.prototype.spliceMethod = function(first, second = "a", ...elements){
     let len = this.length;
+    // console.log(Object.prototype.toString(this));
     if(second == "a"){
         let st = this;
         let pre = "";
@@ -359,7 +360,101 @@ String.prototype.spliceMethod = function(first, second = "a", ...elements){
         
     }
 }
-"darshan".replaceMethod("d","g");
+// "darshan".spliceMethod(2, 1);
 
 
-Object.prototype.toString.call(this)
+// forEach
+// filter
+// find
+// findIndex
+// map
+// reduce
+// join
+// splice
+
+let n = [300,-10,20];
+Array.prototype.forEachMethod = function(fun){
+    for(let i=0; i<this.length; i++){
+        let check = fun(this[i], i, this);
+        if(check)
+            console.log(check);
+    }
+}
+Array.prototype.filterMethod = function(fun){
+    let len = this.length;
+    let resultArr = [];
+    for(let i=0; i<len; i++){
+        let check = fun(this[i], i, this);
+        if(check){
+            resultArr.push(this[i]);
+        }
+    }
+    return resultArr;
+}
+Array.prototype.mapMethod = function(fun){
+    let len = this.length;
+    let resultArr = [];
+    console.log(fun);
+    for(let i=0; i<len; i++){
+        let check = fun(this[i], i ,this);
+        if(check){
+            resultArr.push(check);
+        }
+    }
+    return resultArr;
+}
+Array.prototype.reduceMethod = function(fun, check){
+    let len = this.length;
+    let result;
+    console.log(fun);
+    for(let i=0; i<len; i++){
+        check = fun(check, this[i], i ,this);
+    }
+    return check;
+}
+Array.prototype.findMethod = function(fun){
+    let len = this.length;
+    let check;
+    console.log(fun);
+    for(let i=0; i<len; i++){
+        check = fun(this[i], i ,this);
+        if(check){
+            return this[i];
+        }
+    }
+}
+Array.prototype.findIndexMethod = function(fun){
+    let len = this.length;
+    let check;
+    console.log(fun);
+    for(let i=0; i<len; i++){
+        check = fun(this[i], i ,this);
+        if(check){
+            return i;
+        }
+    }
+    return -1;
+}
+Array.prototype.joinMethod = function(word){
+    let len = this.length;
+    let st = "";
+
+    if(word == undefined){
+        for(let i=0 ;i<len; i++){
+            if(i==len-1)
+                st = st + this[i];
+            else
+                st = st + this[i] + ",";
+        }
+        return st;
+    }
+    else{
+        for(let i=0 ;i<len; i++){
+            if(i==len-1)
+                st = st + this[i];
+            else
+                st = st + this[i] + word;
+        }
+        return st;
+    }
+}
