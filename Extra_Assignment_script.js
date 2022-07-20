@@ -13,112 +13,61 @@
 // .toLowerCase,   .toUpperCase,
 // .length, indexOf(),   lastindexOf()
 
-String.prototype.sliceMethod = function(first = "a", second = "a"){
+String.prototype.sliceMethod = function(first, second){
     let len = this.length;
-    if(first == "a"){
+    let st = "";
+    if(first == undefined){
         return this;
     }
-    else if(second == "a"){
-        let st = "";
-        if(0 <= first && first < len){
-            for(let i=first; i<len; i++){
-                st = st + this[i];
-            }
-            return st;
+    else if(second == undefined){
+        let start = first >=0 ? first : len-Math.abs(first);
+        for(let i=start; i<len; i++){
+            st = st + this[i];
         }
-        else{
-            for(let i=len-Math.abs(first); i<len; i++){
-                st = st + this[i];
-            }
-            return st;
-        }
+        return st;
     }
     else{
-        let st = "";
-        if(0 <=first && first <len && 0 <=second && second < len){
-            for(let i=first; i<second; i++){
-                st = st + this[i];
-            }
-            return st;
+        let [start,end] = (first >=0 && 0 <=second && [first,second]) || (first<0 && second>0 && [first, len-Math.abs(second)]) || [len-Math.abs(first), len-Math.abs(second)];
+        for(let i=start; i<end; i++){
+            st = st + this[i];
         }
-        else if(first<0 && second<0){
-            for(let i=len-Math.abs(first); i<len-Math.abs(second); i++){
-                st = st + this[i];
-            }
-            return st;
-        }
-        else{
-            for(let i=first; i<len-Math.abs(second); i++){
-                st = st + this[i];
-            }
-            return st;
-        }
+        return st;
     }
 }
-String.prototype.substringMethod = function(first, second = "a"){
+String.prototype.substringMethod = function(first, second){
     let len = this.length;
-    if(second == "a"){
-        let st = "";
-        if(0 <= first && first < len){
-            for(let i=first; i<len; i++){
-                st = st + this[i];
-            }
-            console.log(st);
+    let st = "";
+    if(second == undefined){
+        let start = first >=0 ? first : 0;
+        for(let i=start; i<len; i++){
+            st = st + this[i];
         }
-        else{
-            for(let i=0; i<len; i++){
-                st = st + this[i];
-            }
-            console.log(st);
-        }
+        return st;
     }
     else{
-        let st = "";
-        if(0 <=first && first <len && 0 <=second && second < len){
-            for(let i=first; i<second; i++){
-                st = st + this[i];
-            }
-            console.log(st);
+        let [start,end] = (first >=0 && second>=0  && [first,second]) || (first>0 && second<0 && [0, first]);
+        for(let i=start; i<end; i++){
+            st = st + this[i];
         }
-        else if(first>0 && second<0){
-            for(let i=0; i<first; i++){
-                st = st + this[i];
-            }
-            console.log(st);
-        }
+        return st;
     }
 }
-String.prototype.substrMethod = function(first, second = "a"){
+String.prototype.substrMethod = function(first, second){
     let len = this.length;
-    if(second == "a"){
-        let st = "";
-        if(0 <= first && first < len){
-            for(let i=first; i<len; i++){
-                st = st + this[i];
-            }
-            console.log(st);
+    let st = "";
+    if(second == undefined){
+        let start = first >=0 ? first : len-Math.abs(first);
+        for(let i=start; i<len; i++){
+            st = st + this[i];
         }
-        else{
-            for(let i=len-Math.abs(first); i<len; i++){
-                st = st + this[i];
-            }
-            console.log(st);
-        }
+        return st;
     }
     else{
-        let st = "";
-        if(0 <= first && first < len){
-            for(let i=first; i<first+second; i++){
-                st = st + this[i];
-            }
-            console.log(st);
+        let [start,end] = first >=0 ? [first, first+second] : [len-Math.abs(first), len-Math.abs(first)+second];
+        for(let i=start; i<end; i++){
+            st = st + this[i];
         }
-        else{
-            for(let i=len-Math.abs(first); i<len-Math.abs(first)+second; i++){
-                st = st + this[i];
-            }
-            console.log(st);
-        }
+        return st;
     }
 }
 String.prototype.replaceMethod = function(word,newWord){
@@ -147,40 +96,51 @@ String.prototype.replaceMethod = function(word,newWord){
     for(let i=lastIndex; i<len; i++){
         last = last + this[i];
     }
-    console.log(pre + newWord + last);
+    return (pre + newWord + last);
 
 }
 String.prototype.concatMethod = function(word){
-    console.log(this + word);
+    return (this + word);
 }
 String.prototype.trimMethod = function(){
     let len  = this.length;
     let st = "";
-    console.log(this);
+    let pre;
+    let last;
     for(let i=0; i<len; i++){
-        if(this[i] != " "){
-            st = st + this[i];
+        if(this[i] == " "){
+            pre = i;
         }
+        else
+            break;
     }
-    console.log(st);
+    for(let i=len-1; i>=0; i--){
+        if(this[i] == " "){
+            last = i;
+        }
+        else
+            break;
+    }
+    for(let i=pre+1; i<last; i++){
+        st = st + this[i];
+    }
+    return st;
 }
 String.prototype.padStartMethod = function(second, first){
     let len = this.length;
-    let netlength = second - len;
     let st = "";
-    for(let i=0; i<netlength; i++){
+    for(let i=0; i<(second - len); i++){
         st = st + first;
     }
-    console.log(st + this);
+    return (st + this);
 }
 String.prototype.padEndMethod = function(second, first){
     let len = this.length;
-    let netlength = second - len;
     let st = "";
-    for(let i=0; i<netlength; i++){
+    for(let i=0; i< second - len; i++){
         st = st + first;
     }
-    console.log(this + st);
+    return (this + st);
 }
 String.prototype.repeateMethod = function(num){
     for(let i=0; i<num; i++){
@@ -213,7 +173,7 @@ String.prototype.splitMethod = function(first){
             break;
         }
     }
-    console.log(arr);
+    return arr;
 }
 String.prototype.includesMethod = function(word){
     let len = this.length;
@@ -225,12 +185,11 @@ String.prototype.includesMethod = function(word){
                 check = check + this[j];
             }
             if(check == word){
-                console.log(true);
-                break;
+                return true;
             }
         }
         if(i == len-1)
-            console.log(false);
+            return false;
     }
 }
 String.prototype.startswithMethod = function(word){
@@ -360,64 +319,44 @@ String.prototype.spliceMethod = function(first, second = "a", ...elements){
         
     }
 }
-// "darshan".spliceMethod(2, 1);
 
-
-// forEach
-// filter
-// find
-// findIndex
-// map
-// reduce
-// join
-// splice
-
-let n = [300,-10,20];
+// ===========================================================
+// ================  Array Methods  ===========================
 Array.prototype.forEachMethod = function(fun){
     for(let i=0; i<this.length; i++){
-        let check = fun(this[i], i, this);
-        if(check)
-            console.log(check);
+        fun(this[i], i, this);
     }
 }
 Array.prototype.filterMethod = function(fun){
     let len = this.length;
     let resultArr = [];
     for(let i=0; i<len; i++){
-        let check = fun(this[i], i, this);
-        if(check){
-            resultArr.push(this[i]);
-        }
+        (fun(this[i], i, this) && resultArr.push(this[i]));
     }
     return resultArr;
 }
 Array.prototype.mapMethod = function(fun){
     let len = this.length;
     let resultArr = [];
-    console.log(fun);
+
     for(let i=0; i<len; i++){
-        let check = fun(this[i], i ,this);
-        if(check){
-            resultArr.push(check);
-        }
+        resultArr.push(fun(this[i], i ,this));
     }
     return resultArr;
 }
-Array.prototype.reduceMethod = function(fun, check){
+Array.prototype.reduceMethod = function(fun, acc){
     let len = this.length;
-    let result;
-    console.log(fun);
+
     for(let i=0; i<len; i++){
-        check = fun(check, this[i], i ,this);
+        acc = fun(acc, this[i], i ,this);
     }
-    return check;
+    return acc;
 }
 Array.prototype.findMethod = function(fun){
     let len = this.length;
-    let check;
-    console.log(fun);
+
     for(let i=0; i<len; i++){
-        check = fun(this[i], i ,this);
+        let check = fun(this[i], i ,this);
         if(check){
             return this[i];
         }
@@ -425,10 +364,20 @@ Array.prototype.findMethod = function(fun){
 }
 Array.prototype.findIndexMethod = function(fun){
     let len = this.length;
-    let check;
-    console.log(fun);
+
     for(let i=0; i<len; i++){
-        check = fun(this[i], i ,this);
+        let check = fun(this[i], i ,this);
+        if(check){
+            return i;
+        }
+    }
+    return -1;
+}
+Array.prototype.findLastIndexMethod = function(fun){
+    let len = this.length;
+
+    for(let i=len-1; i>=0; i--){
+        let check = fun(this[i], i ,this);
         if(check){
             return i;
         }
@@ -439,22 +388,9 @@ Array.prototype.joinMethod = function(word){
     let len = this.length;
     let st = "";
 
-    if(word == undefined){
-        for(let i=0 ;i<len; i++){
-            if(i==len-1)
-                st = st + this[i];
-            else
-                st = st + this[i] + ",";
-        }
-        return st;
+    for(let i=0 ;i<len-1; i++){
+        st = st + this[i] + (word || ",");
     }
-    else{
-        for(let i=0 ;i<len; i++){
-            if(i==len-1)
-                st = st + this[i];
-            else
-                st = st + this[i] + word;
-        }
-        return st;
-    }
+    st = st + this[len-1];
+    return st;
 }
