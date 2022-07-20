@@ -13,9 +13,12 @@
 // .toLowerCase,   .toUpperCase,
 // .length, indexOf(),   lastindexOf()
 
-String.prototype.sliceMethod = function(first, second = "a"){
+String.prototype.sliceMethod = function(first = "a", second = "a"){
     let len = this.length;
-    if(second == "a"){
+    if(first == "a"){
+        return this;
+    }
+    else if(second == "a"){
         let st = "";
         if(0 <= first && first < len){
             for(let i=first; i<len; i++){
@@ -118,7 +121,7 @@ String.prototype.substrMethod = function(first, second = "a"){
         }
     }
 }
-String.prototype.replaceMethod = function(word, newWord){
+String.prototype.replaceMethod = function(word,newWord){
     let len = this.length;
     let wordlength = word.length;
     let firstIndex;
@@ -356,4 +359,7 @@ String.prototype.spliceMethod = function(first, second = "a", ...elements){
         
     }
 }
-"darshan".spliceMethod(-4,3);
+"darshan".replaceMethod("d","g");
+
+
+Object.prototype.toString.call(this)
